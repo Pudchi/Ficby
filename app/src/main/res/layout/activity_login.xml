@@ -8,7 +8,7 @@
     tools:context="com.dashwood.ficby.LoginActivity">
 
     <ImageView
-        android:id="@+id/app_back"
+        android:id="@+id/app_pic"
         android:layout_width="500dp"
         android:layout_height="300dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,9 +25,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/ficby_login"
-        app:layout_constraintTop_toTopOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_pic"
         android:layout_marginTop="200dp"
         app:layout_constraintHorizontal_bias="0.147" />
+
 
     <EditText
         android:id="@+id/email_input"
@@ -38,15 +39,15 @@
         android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="15dp"
-        android:hint="帳號: E-Mail"
         android:gravity="center"
-        android:maxLines="1"
+        android:hint="帳號: Mail"
         android:inputType="textEmailAddress"
+        android:maxLines="1"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_back" />
+        app:layout_constraintTop_toBottomOf="@+id/app_pic" />
 
     <EditText
         android:id="@+id/password_input"
@@ -77,6 +78,7 @@
         android:background="@drawable/button_default"
         android:text="登入"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -95,6 +97,7 @@
         android:background="@drawable/button_default"
         android:text="忘記密碼?"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/btn_login"
         app:layout_constraintRight_toRightOf="parent"
@@ -111,6 +114,7 @@
         android:layout_marginTop="83dp"
         android:background="@drawable/button_default"
         android:text="還沒有帳號嗎? 點此加入吧!"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -123,7 +127,7 @@
         android:layout_height="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_pic"
         android:layout_marginTop="230dp"
         android:visibility="gone"/>
 

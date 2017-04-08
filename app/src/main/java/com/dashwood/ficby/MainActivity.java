@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     TextView app_logo, version;
     Button account, beacon, band, more;
 
+
     static final String CIRCULAR_BOLD = "fonts/Circular_bold.ttf";
     static final String CIRCULAR_BOOK = "fonts/Circular_book.ttf";
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+
+
 
 
         app_logo = (TextView) findViewById(R.id.app_logo);
@@ -43,10 +46,13 @@ public class MainActivity extends AppCompatActivity {
         more = (Button) findViewById(R.id.more_button);
         more.setTypeface(typeface_regular);
 
+
+
         account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+                startActivity(new Intent(MainActivity.this, AccountActivity.class));
             }
         });
 
