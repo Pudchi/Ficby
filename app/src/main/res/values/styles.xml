@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:titleTextColor">#ffffff</item>
         <item name="colorButtonNormal">#ffd600</item>
+        <item name="colorControlNormal">#fffde7</item>
+        <item name="colorControlActivated">#ffff00</item>
 
     </style>
 

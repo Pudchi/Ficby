@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#78909c"
+    android:background="#000000"
     tools:context="com.dashwood.ficby.MainActivity">
 
     <ImageView
@@ -20,12 +20,12 @@
         android:id="@+id/app_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="85dp"
         android:fontFamily="monospace"
-        android:text="F i c b y"
+        android:text="Ficby"
         android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:textColor="#ffffff"
-        android:textSize="60sp"
+        android:textSize="90sp"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toRightOf="@+id/app_back"
@@ -48,7 +48,7 @@
         android:id="@+id/beacon_button"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="Beacon"
         android:textSize="22sp"
         android:background="@drawable/button_notpress"
@@ -62,7 +62,7 @@
         android:id="@+id/band_button"
         android:layout_width="130dp"
         android:layout_height="60dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button_notpress"
         android:text="MI Band"
         android:textSize="24sp"
@@ -76,12 +76,26 @@
         android:id="@+id/more_button"
         android:layout_width="100dp"
         android:layout_height="55dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="90dp"
         android:text="MORE"
         android:textSize="24sp"
         android:background="@drawable/button_static"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_button" />
+
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="0dp"
+        android:text="Version: 1.0"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

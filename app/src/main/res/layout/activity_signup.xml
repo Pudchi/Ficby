@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#212121"
-    tools:context="com.dashwood.ficby.LoginActivity">
+    android:background="#006064"
+    tools:context="com.dashwood.ficby.SignupActivity">
 
     <ImageView
         android:id="@+id/app_back"
@@ -16,18 +16,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ficby_hi_res"
         android:layout_marginTop="10dp"
-        app:layout_constraintHorizontal_bias="0.51" />
+        app:layout_constraintHorizontal_bias="0.482" />
 
     <ImageView
-        android:id="@+id/login_pic"
+        android:id="@+id/signup_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ficby_login"
+        app:srcCompat="@drawable/ficby_signup"
         app:layout_constraintTop_toTopOf="@+id/app_back"
         android:layout_marginTop="200dp"
-        app:layout_constraintHorizontal_bias="0.147" />
+        app:layout_constraintHorizontal_bias="0.852" />
 
     <EditText
         android:id="@+id/email_input"
@@ -57,7 +57,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="7dp"
-        android:hint="密碼"
+        android:hint="密碼: 要大於8個字元!"
         android:inputType="textPassword"
         android:gravity="center"
         android:maxLines="1"
@@ -68,53 +68,32 @@
         app:layout_constraintTop_toBottomOf="@+id/email_input" />
 
     <Button
-        android:id="@+id/btn_login"
-        android:layout_width="130dp"
+        android:id="@+id/btn_signup"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_default"
+        android:text="註冊帳號"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_input" />
+
+    <Button
+        android:id="@+id/btn_backtologin"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/button_default"
-        android:text="登入"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.138"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_input" />
-
-    <Button
-        android:id="@+id/btn_forget"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="0dp"
-        android:background="@drawable/button_default"
-        android:text="忘記密碼?"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@+id/btn_login"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_login" />
-
-    <Button
-        android:id="@+id/btn_signup"
-        android:layout_width="280dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="83dp"
-        android:background="@drawable/button_default"
-        android:text="還沒有帳號嗎? 點此加入吧!"
+        android:text="已經有帳號?  返回登入頁面!"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_input" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -124,8 +103,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/app_back"
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="243dp"
+        app:layout_constraintHorizontal_bias="0.51"
         android:visibility="gone"/>
-
 
 </android.support.constraint.ConstraintLayout>
