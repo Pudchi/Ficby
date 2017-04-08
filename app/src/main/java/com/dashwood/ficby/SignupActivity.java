@@ -96,8 +96,6 @@ public class SignupActivity extends AppCompatActivity {
                                 else
                                 {
                                     Intent intent = new Intent(SignupActivity.this, AccountActivity.class);
-
-                                    intent.putExtra("account_mail", mail);
                                     startActivity(intent);
                                     finish();
                                 }

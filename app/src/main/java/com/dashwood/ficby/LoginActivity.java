@@ -110,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
                                 else
                                 {
                                     Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
-                                    intent.putExtra("account_mail", mail);
                                     startActivity(intent);
                                     finish();
                                 }

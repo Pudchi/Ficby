@@ -22,7 +22,9 @@ public class AccountActivity extends AppCompatActivity {
     TextView account_mail;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private FirebaseUser user;
     Typeface typeface_regular;
+    String mail_address ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class AccountActivity extends AppCompatActivity {
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
 
         auth = FirebaseAuth.getInstance();
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -48,10 +50,10 @@ public class AccountActivity extends AppCompatActivity {
         log_out = (Button) findViewById(R.id.btn_logout);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         account_mail = (TextView) findViewById(R.id.account_text);
-        Intent intent = this.getIntent();
-        String mail_address = intent.getStringExtra("account_mail");
+        //Intent intent = this.getIntent();
+        //tring mail_address = intent.getStringExtra("account_mail");
 
-        account_mail.setText(mail_address);
+        account_mail.setText(user.getEmail());
         account_mail.setTypeface(typeface_regular);
 
 
