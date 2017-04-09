@@ -34,12 +34,12 @@
 
     <Button
         android:id="@+id/account_button"
-        android:layout_width="130dp"
-        android:layout_height="60dp"
+        android:layout_width="140dp"
+        android:layout_height="55dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/button_static"
-        android:text="Account"
-        android:textSize="22sp"
+        android:text="帳號"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_pic" />
@@ -74,12 +74,12 @@
 
     <Button
         android:id="@+id/more_button"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="55dp"
         android:layout_marginTop="90dp"
-        android:text="MORE"
-        android:textSize="24sp"
         android:background="@drawable/button_static"
+        android:text="更多功能"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/account_button" />

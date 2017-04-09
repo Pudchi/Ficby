@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,16 +19,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
+import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class LoginActivity extends AppCompatActivity {
 
     //TextView app_logo;
     Button login, forget, sign_up;
     EditText input_mail, input_password;
-    Typeface typeface_regular;
+    TextView login_text;
+    Typeface typeface_regular, typeface_zh_medium;
     ProgressBar progressBar;
     private FirebaseAuth auth;
-    String mail = "";
+    //String mail = "";
 
 
     @Override
@@ -44,15 +47,21 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
+        login_text = (TextView) findViewById(R.id.login_text);
+        login_text.setTypeface(typeface_zh_medium);
         input_mail = (EditText) findViewById(R.id.email_input);
         input_mail.setTypeface(typeface_regular);
         input_password = (EditText) findViewById(R.id.password_input);
         input_password.setTypeface(typeface_regular);
 
         login = (Button) findViewById(R.id.btn_login);
+        login.setTypeface(typeface_zh_medium);
         forget = (Button) findViewById(R.id.btn_forget);
+        forget.setTypeface(typeface_zh_medium);
         sign_up = (Button) findViewById(R.id.btn_signup);
+        sign_up.setTypeface(typeface_zh_medium);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         sign_up.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mail = input_mail.getText().toString();
+                String mail = input_mail.getText().toString();
                 final String passwd = input_password.getText().toString();
 
                 if (TextUtils.isEmpty(mail))

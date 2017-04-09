@@ -22,13 +22,29 @@
         android:id="@+id/login_pic"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_marginTop="200dp"
+        app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@drawable/ficby_login"
         app:layout_constraintTop_toTopOf="@+id/app_pic"
-        android:layout_marginTop="200dp"
-        app:layout_constraintHorizontal_bias="0.147" />
+        app:srcCompat="@drawable/circle_login" />
 
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text="登入"
+        android:textColor="#ffffff"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/login_pic"
+        app:layout_constraintLeft_toLeftOf="@+id/login_pic"
+        app:layout_constraintRight_toRightOf="@+id/login_pic"
+        app:layout_constraintTop_toTopOf="@+id/login_pic" />
 
     <EditText
         android:id="@+id/email_input"
@@ -78,7 +94,7 @@
         android:background="@drawable/button_default"
         android:text="登入"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -97,7 +113,7 @@
         android:background="@drawable/button_default"
         android:text="忘記密碼?"
         android:textColor="@android:color/black"
-        android:textSize="18sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/btn_login"
         app:layout_constraintRight_toRightOf="parent"
@@ -114,7 +130,7 @@
         android:layout_marginTop="83dp"
         android:background="@drawable/button_default"
         android:text="還沒有帳號嗎? 點此加入吧!"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

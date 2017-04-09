@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,13 +20,15 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOLD;
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
+import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class SignupActivity extends AppCompatActivity {
 
     Button backto_login, sign_up;
     EditText input_mail, input_password;
-    Typeface typeface_bold, typeface_regular;
-    String mail = "";
+    TextView signup_text;
+    Typeface typeface_bold, typeface_regular, typeface_zh_medium;
+    //String mail = "";
 
     private ProgressBar progressBar;
     private FirebaseAuth auth;
@@ -39,13 +42,18 @@ public class SignupActivity extends AppCompatActivity {
 
         typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
+        signup_text = (TextView) findViewById(R.id.sign_up_text);
+        signup_text.setTypeface(typeface_zh_medium);
         input_mail = (EditText) findViewById(R.id.email_input);
         input_mail.setTypeface(typeface_regular);
         input_password = (EditText) findViewById(R.id.password_input);
         input_password.setTypeface(typeface_regular);
         sign_up = (Button) findViewById(R.id.btn_signup);
+        sign_up.setTypeface(typeface_zh_medium);
         backto_login = (Button) findViewById(R.id.btn_backtologin);
+        backto_login.setTypeface(typeface_zh_medium);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         backto_login.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mail = input_mail.getText().toString().trim();
+                String mail = input_mail.getText().toString().trim();
                 String passwd = input_password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(mail))

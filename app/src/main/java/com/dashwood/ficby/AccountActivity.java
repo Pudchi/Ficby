@@ -7,23 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
+import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class AccountActivity extends AppCompatActivity {
 
-    Button log_out;
-    ProgressBar progressBar;
+    Button log_out, backto_main;
     TextView account_mail;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    Typeface typeface_regular;
+    Typeface typeface_regular, typeface_zh_medium;
     String mail_address ="";
 
     @Override
@@ -31,6 +30,7 @@ public class AccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
         auth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -48,24 +48,35 @@ public class AccountActivity extends AppCompatActivity {
         };
 
         log_out = (Button) findViewById(R.id.btn_logout);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        log_out.setTypeface(typeface_zh_medium);
         account_mail = (TextView) findViewById(R.id.account_text);
+        backto_main = (Button) findViewById(R.id.btn_backto_main);
+        backto_main.setTypeface(typeface_zh_medium);
+
         //Intent intent = this.getIntent();
         //tring mail_address = intent.getStringExtra("account_mail");
 
-        account_mail.setText(user.getEmail());
-        account_mail.setTypeface(typeface_regular);
-
-
-        if (progressBar != null)
+        if (auth.getCurrentUser() != null)
         {
-            progressBar.setVisibility(View.GONE);
+            account_mail.setText(user.getEmail());
+            account_mail.setTypeface(typeface_regular);
         }
+
+
 
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 auth.signOut();
+                finish();
+            }
+        });
+
+        backto_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountActivity.this, MainActivity.class));
+                finish();
             }
         });
     }
@@ -73,7 +84,6 @@ public class AccountActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -90,4 +100,12 @@ public class AccountActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (authListener != null) {
+            auth.removeAuthStateListener(authListener);
+        }
+    }
 }
