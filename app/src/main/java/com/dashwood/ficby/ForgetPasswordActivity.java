@@ -54,7 +54,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(mail))
                 {
                     input_mail.setError("E-Mail 不能為空!");
-                    //Toast.makeText(getApplication(), "E-Mail 不能為空!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplication(), "Mail不能為空!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -70,7 +70,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    Toast.makeText(ForgetPasswordActivity.this, "此信箱未註冊過!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(ForgetPasswordActivity.this, "此信箱未註冊過! 返回註冊!", Toast.LENGTH_LONG).show();
                                 }
 
                                 progressBar.setVisibility(View.GONE);

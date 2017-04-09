@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     static final String CIRCULAR_BOLD = "fonts/Circular_bold.ttf";
     static final String CIRCULAR_BOOK = "fonts/Circular_book.ttf";
-    static final String SOFT_REGULAR = "fonts/Noto_Sans_Soft_Regular.ttf";
-    static final String SOFT_NORMAL = "fonts/Noto_Sans_Soft_Normal.ttf";
     static final String SOFT_MEDIUM = "fonts/Noto_Sans_Soft_Medium.ttf";
 
     Typeface typeface_bold, typeface_regular

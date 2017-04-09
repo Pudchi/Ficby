@@ -81,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String mail = input_mail.getText().toString();
-                final String passwd = input_password.getText().toString();
+                String mail = input_mail.getText().toString().trim();
+                final String passwd = input_password.getText().toString().trim();
 
                 if (TextUtils.isEmpty(mail))
                 {
@@ -109,7 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                                 {
                                     if (passwd.length() < 6)
                                     {
-                                        input_password.setError("密碼太短!! 要大於6個字元");
+                                        input_password.setError("密碼太短!! 需大於6個字元");
+                                        //Toast.makeText(getApplicationContext(), "密碼太短!!需大於6個字元", Toast.LENGTH_SHORT).show();
                                     }
                                     else
                                     {

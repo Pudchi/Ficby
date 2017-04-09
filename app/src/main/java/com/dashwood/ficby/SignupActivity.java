@@ -72,7 +72,7 @@ public class SignupActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(mail))
                 {
                     input_mail.setError("請輸入帳號(Mail)!");
-                    //Toast.makeText(getApplicationContext(), "請輸入帳號(E-Mail)!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "請輸入帳號(Mail)!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -86,6 +86,8 @@ public class SignupActivity extends AppCompatActivity {
                 if (passwd.length() < 6)
                 {
                     input_password.setError("密碼太短!! 要大於6個字元");
+                    //Toast.makeText(getApplicationContext(), "密碼太短!! 要大於6個字元", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 progressBar.setVisibility(View.VISIBLE);
