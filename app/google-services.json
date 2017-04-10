@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "982519930227",
+    "firebase_url": "https://ficby-6155f.firebaseio.com",
+    "project_id": "ficby-6155f",
+    "storage_bucket": "ficby-6155f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982519930227:android:3817868b0a7e1f72",
+        "android_client_info": {
+          "package_name": "com.dashwood.ficby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982519930227-o1a2qk0e4ht4udfu1rm9fjb6th2vln86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dashwood.ficby",
+            "certificate_hash": "12ac6d888f51fcb3e0661a27da0fabd35669db36"
+          }
+        },
+        {
+          "client_id": "982519930227-iprmk5hntihjn3ke14hg605qshsgaiid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjdthAXWqiXApMgUrw75WWCuwjywEkKz0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982519930227-iprmk5hntihjn3ke14hg605qshsgaiid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
