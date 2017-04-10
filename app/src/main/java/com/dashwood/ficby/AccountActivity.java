@@ -54,7 +54,7 @@ public class AccountActivity extends AppCompatActivity {
         backto_main.setTypeface(typeface_zh_medium);
 
         //Intent intent = this.getIntent();
-        //tring mail_address = intent.getStringExtra("account_mail");
+        //String mail_address = intent.getStringExtra("account_mail");
 
         if (auth.getCurrentUser() != null)
         {
