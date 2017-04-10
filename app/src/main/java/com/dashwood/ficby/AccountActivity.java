@@ -75,7 +75,7 @@ public class AccountActivity extends AppCompatActivity {
         backto_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountActivity.this, MainActivity.class));
+                //startActivity(new Intent(AccountActivity.this, MainActivity.class));
                 finish();
             }
         });
