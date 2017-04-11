@@ -8,15 +8,15 @@
     tools:context="com.dashwood.ficby.LoginActivity">
 
     <ImageView
-        android:id="@+id/app_pic"
+        android:id="@+id/band_pic"
         android:layout_width="500dp"
         android:layout_height="300dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ficby_hi_res"
-        android:layout_marginTop="10dp"
-        app:layout_constraintHorizontal_bias="0.51" />
+        app:srcCompat="@drawable/ficby_hi_res" />
 
     <ImageView
         android:id="@+id/login_pic"
@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.147"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/app_pic"
+        app:layout_constraintTop_toTopOf="@+id/band_pic"
         app:srcCompat="@drawable/circle_login" />
 
 
@@ -63,7 +63,7 @@
         android:textColorHint="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_pic" />
+        app:layout_constraintTop_toBottomOf="@+id/band_pic" />
 
     <EditText
         android:id="@+id/password_input"
@@ -141,11 +141,11 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginTop="230dp"
+        android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/app_pic"
-        android:layout_marginTop="230dp"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toTopOf="@+id/band_pic" />
 
 
 </android.support.constraint.ConstraintLayout>

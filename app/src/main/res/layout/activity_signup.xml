@@ -8,7 +8,7 @@
     tools:context="com.dashwood.ficby.SignupActivity">
 
     <ImageView
-        android:id="@+id/app_pic"
+        android:id="@+id/band_pic"
         android:layout_width="500dp"
         android:layout_height="300dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintHorizontal_bias="0.852"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/app_pic"
+        app:layout_constraintTop_toTopOf="@+id/band_pic"
         app:srcCompat="@drawable/circle_signup" />
 
     <TextView
@@ -61,7 +61,7 @@
         android:textColorHint="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_pic" />
+        app:layout_constraintTop_toBottomOf="@+id/band_pic" />
 
     <EditText
         android:id="@+id/password_input"
@@ -73,7 +73,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="7dp"
         android:gravity="center"
-        android:hint="密碼: 要大於8個字元!"
+        android:hint="密碼:  要大於8個字元!"
         android:inputType="textPassword"
         android:maxLines="1"
         android:textColor="@android:color/white"
@@ -119,7 +119,7 @@
         android:layout_height="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/app_pic"
+        app:layout_constraintTop_toTopOf="@+id/band_pic"
         android:layout_marginTop="243dp"
         app:layout_constraintHorizontal_bias="0.51"
         android:visibility="gone"/>

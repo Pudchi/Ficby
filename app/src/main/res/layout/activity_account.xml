@@ -8,7 +8,7 @@
     tools:context="com.dashwood.ficby.AccountActivity">
 
     <ImageView
-        android:id="@+id/app_pic"
+        android:id="@+id/band_pic"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="7dp"

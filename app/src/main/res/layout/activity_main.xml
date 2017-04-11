@@ -8,7 +8,7 @@
     tools:context="com.dashwood.ficby.MainActivity">
 
     <ImageView
-        android:id="@+id/app_pic"
+        android:id="@+id/band_pic"
         android:layout_width="500dp"
         android:layout_height="300dp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -28,9 +28,9 @@
         android:textSize="90sp"
         android:visibility="visible"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintLeft_toRightOf="@+id/app_pic"
-        app:layout_constraintRight_toLeftOf="@+id/app_pic"
-        app:layout_constraintTop_toTopOf="@+id/app_pic" />
+        app:layout_constraintLeft_toRightOf="@+id/band_pic"
+        app:layout_constraintRight_toLeftOf="@+id/band_pic"
+        app:layout_constraintTop_toTopOf="@+id/band_pic" />
 
     <Button
         android:id="@+id/account_button"
@@ -42,7 +42,7 @@
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_pic" />
+        app:layout_constraintTop_toBottomOf="@+id/band_pic" />
 
     <Button
         android:id="@+id/beacon_button"
@@ -50,7 +50,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:text="Beacon"
-        android:textSize="22sp"
+        android:textSize="24sp"
         android:background="@drawable/button_notpress"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
