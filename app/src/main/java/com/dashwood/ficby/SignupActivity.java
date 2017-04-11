@@ -92,11 +92,11 @@ public class SignupActivity extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
-                auth.signInWithEmailAndPassword(mail, passwd)
+                auth.createUserWithEmailAndPassword(mail, passwd)
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignupActivity.this, "註冊成功!", Toast.LENGTH_SHORT).show();
+
                                 progressBar.setVisibility(View.GONE);
 
                                 if (!task.isSuccessful())
@@ -105,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
+                                    Toast.makeText(SignupActivity.this, "註冊成功!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignupActivity.this, AccountActivity.class);
                                     startActivity(intent);
                                     finish();
