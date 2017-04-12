@@ -34,8 +34,10 @@
 
     <HorizontalScrollView
         android:id="@+id/line_chart_base"
-        android:layout_width="350dp"
+        android:layout_width="380dp"
         android:layout_height="200dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:layout_marginTop="11dp"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -51,18 +53,34 @@
     </HorizontalScrollView>
 
     <Button
-        android:id="@+id/btn_draw_line_chart"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_connect_band"
+        android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="9dp"
+        android:background="@drawable/button_default"
+        android:text="連接手環"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line_chart_base"
+        android:layout_marginLeft="8dp" />
+
+    <Button
+        android:id="@+id/btn_draw_line_chart"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="9dp"
         android:background="@drawable/button_default"
         android:text="產生圖表"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line_chart_base" />
+        app:layout_constraintTop_toBottomOf="@+id/line_chart_base"
+        android:layout_marginRight="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>
