@@ -25,7 +25,7 @@ public class BandActivity extends AppCompatActivity {
     int data_random = 8;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private final static int REQUEST_ENABLE_BT=1;
-    private final static int DISABLE_BT = 0;
+    //private final static int DISABLE_BT = 0;
 
     LineView lineView;
     ArrayList <String> x_value = new ArrayList<String>();
@@ -65,8 +65,6 @@ public class BandActivity extends AppCompatActivity {
                 {
                     Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     startActivityForResult(enableBluetooth, REQUEST_ENABLE_BT);
-
-
                 }
                 startActivity(new Intent(BandActivity.this, ScanBTActivity.class));
             }
