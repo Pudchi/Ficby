@@ -24,8 +24,11 @@
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".AccountActivity" />
         <activity android:name=".BandActivity" />
-        <activity android:name=".ScanBTActivity"
-            android:theme="@style/Transparent"></activity>
+        <activity
+            android:name=".ScanBTActivity"
+            android:theme="@style/Transparent" />
+        <activity android:name=".BeaconActivity" />
+        <activity android:name=".MoreActivity"></activity>
     </application>
 
 </manifest>

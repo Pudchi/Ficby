@@ -62,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        beacon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BeaconActivity.class));
+            }
+        });
+
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MoreActivity.class));
+            }
+        });
+
     }
 
 
