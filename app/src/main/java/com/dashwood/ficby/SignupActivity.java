@@ -105,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
+
                                     Toast.makeText(SignupActivity.this, "註冊成功!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignupActivity.this, AccountActivity.class);
                                     startActivity(intent);
