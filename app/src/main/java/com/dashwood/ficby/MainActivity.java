@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         account = (Button) findViewById(R.id.account_button);
         account.setTypeface(typeface_zh_medium);
         beacon = (Button) findViewById(R.id.beacon_button);
-        beacon.setTypeface(typeface_regular);
+        beacon.setTypeface(typeface_zh_medium);
         band = (Button) findViewById(R.id.band_button);
-        band.setTypeface(typeface_regular);
+        band.setTypeface(typeface_zh_medium);
         more = (Button) findViewById(R.id.more_button);
         more.setTypeface(typeface_zh_medium);
 
