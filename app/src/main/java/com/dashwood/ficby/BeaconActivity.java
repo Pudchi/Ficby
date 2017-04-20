@@ -52,7 +52,8 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     private boolean mIsScanning;
     Typeface typeface_zh_medium;
     TextView location_text;
-    Button turn_format, get_location;
+    Button turn_format, get_location, scan;
+    ListView deviceListView;
 
     double latitude;
     double longitude;
@@ -62,6 +63,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     static int loc_update_hit = 0;
     static int loc_flag = 0;
     static int format_button_flag = 0;
+    static int scan_button_flag =0;
     public int c = 0;
     public double i = 0, j = 0;
 
@@ -129,48 +131,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         }
     }
 
-    android.os.Handler loc_handler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 2000:
-                    String st = msg.getData().getString("Result");
 
-
-                    if (loc_flag == 0) {
-                        location_text.setText(locate);
-                    } else {
-                        location_text.setText(cant_get_location);
-                    }
-                    break;
-
-                case 3000:
-                    String st_second = msg.getData().getString("Result");
-
-
-                    String two_line_address_1 = result_address.substring(0, 3);
-                    String two_line_address_2 = result_address.substring(3, 10);
-                    String two_line_address_3 = result_address.substring(10);
-
-                    location_text.setText(two_line_address_1 + "\n" + two_line_address_2 + "\n" + two_line_address_3);
-
-
-                    break;
-
-                case 5000:
-
-                    String st_nw = msg.getData().getString("Result");
-
-                    location_text.setText(no_internet);
-
-
-                default:
-                    break;
-
-            }
-        }
-    };
 
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
@@ -283,11 +244,14 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         //ImageView blue_beacon = (ImageView) findViewById(R.id.blue_beacon);
         //ImageView green_beacon = (ImageView) findViewById(R.id.green_beacon);
         //ImageView purple_beacon = (ImageView) findViewById(R.id.purple_beacon);
-        final Button scan = (Button) findViewById(R.id.btn_scan);
+        scan = (Button) findViewById(R.id.btn_scan);
         get_location = (Button) findViewById(R.id.btn_locate);
+        get_location.setTypeface(typeface_zh_medium);
         turn_format = (Button) findViewById(R.id.btn_change_format);
+        turn_format.setTypeface(typeface_zh_medium);
         location_text = (TextView) findViewById(R.id.locate_text);
         location_text.setTypeface(typeface_zh_medium);
+        deviceListView = (ListView) findViewById(R.id.list);
 
         String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
                 + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage
@@ -308,12 +272,10 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
                 + "\nDIS_AVG:" + mDeviceAdapter.purple_disaverage
                 + "\nDIS_Min:" + mDeviceAdapter.purple_dismin;
         ble_list.setText(str);
-        initialize();
+        initialize(1000);
 
         buildGoogleApiClient();
         checkLocationPermission();
-
-
 
         createLocationRequest();
         getLocation();
@@ -321,6 +283,38 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (scan_button_flag == 0)
+                {
+                    String start_scan = "start_sc";
+                    Message stc = new Message();
+                    stc.what = 4000;
+                    Bundle bd_start = new Bundle();
+
+                    scan.setText("STOP");
+                    scan_button_flag = 1;
+                    Toast.makeText(getApplicationContext(), "SCANNING...", Toast.LENGTH_SHORT).show();
+
+                    bd_start.putString("Result", start_scan);
+                    stc.setData(bd_start);
+                    scan_handler.sendMessage(stc);
+                }
+                else if (scan_button_flag == 1)
+                {
+                    String stop_scan = "stop_sc";
+                    Message spc = new Message();
+                    spc.what = 6000;
+                    Bundle bd_stop = new Bundle();
+
+                    scan.setText("STOP");
+                    scan_button_flag = 0;
+                    Toast.makeText(getApplicationContext(), "STOP SCANNING...", Toast.LENGTH_SHORT).show();
+
+                    bd_stop.putString("STOP", stop_scan);
+                    spc.setData(bd_stop);
+                    scan_handler.sendMessage(spc);
+                }
+
+
                 if (scan.getText().toString() == "SCAN")
                 {
                     if (!mBTAdapter.isEnabled())
@@ -329,7 +323,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
                         startActivityForResult(enableBluetooth, 1);
                     }
                     startScan();
-                    scan.setText("STOP");
+
                 }
 
                 else if (scan.getText().toString() == "STOP")
@@ -483,30 +477,132 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     }
 
 
-    private void initialize() {
+    private void initialize(final int value)
+    {
+        Runnable init = new Runnable() {
+            @Override
+            public void run() {
 
-        if (!BLEUtil.isBLESupported(this)) {
-            Toast.makeText(this, "此裝置不支援低功率藍牙(BLE)", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+                String result = "Success";
+                Message me = new Message();
+                me.what = value;
+                Bundle d = new Bundle();
 
-        BluetoothManager manager = BLEUtil.getManager(this);
-        if (manager != null) {
-            mBTAdapter = manager.getAdapter();
-        }
-        if (mBTAdapter == null) {
-            Toast.makeText(this, "SORRY, 此裝置不支援藍牙", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
+                if (!BLEUtil.isBLESupported(getApplicationContext())) {
+                    Toast.makeText(getApplicationContext(), "此裝置不支援低功率藍牙(BLE)", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                }
 
-        ListView deviceListView = (ListView) findViewById(R.id.list);
-        mDeviceAdapter = new DeviceAdapter(this, R.layout.beacon_list, new ArrayList<ScannedDevice>());
-        deviceListView.setAdapter(mDeviceAdapter);
-        stopScan();
+                try {
+                    BluetoothManager manager = BLEUtil.getManager(getApplicationContext());
+                    if (manager != null) {
+                        mBTAdapter = manager.getAdapter();
+                    }
+                    if (mBTAdapter == null) {
+                        Toast.makeText(getApplicationContext(), "SORRY, 此裝置不支援藍牙", Toast.LENGTH_SHORT).show();
+                        finish();
+                        return;
+                    }
+                }catch (Exception bt)
+                {
+                    bt.getMessage();
+                }
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mDeviceAdapter = new DeviceAdapter(getApplicationContext(), R.layout.beacon_list, new ArrayList<ScannedDevice>());
+                            }
+                        });
+                    }
+                }).start();
+
+
+
+
+
+                d.putString("Result", result);
+                me.setData(d);
+                scan_handler.sendMessage(me);
+
+            }
+        };
+        new Thread(init).start();
+
     }
 
+    android.os.Handler scan_handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what)
+            {
+                case 1000:
+                    deviceListView.setAdapter(mDeviceAdapter);
+                    stopScan();
+                    Toast.makeText(getApplicationContext(), "Scan Initialized", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case 4000:
+                    startScan();
+                    break;
+
+                case 6000:
+                    stopScan();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
+    android.os.Handler loc_handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 2000:
+                    String st = msg.getData().getString("Result");
+
+
+                    if (loc_flag == 0) {
+                        location_text.setText(locate);
+                    } else {
+                        location_text.setText(cant_get_location);
+                    }
+                    break;
+
+                case 3000:
+                    String st_second = msg.getData().getString("Result");
+
+
+                    String two_line_address_1 = result_address.substring(0, 3);
+                    String two_line_address_2 = result_address.substring(3, 10);
+                    String two_line_address_3 = result_address.substring(10);
+
+                    location_text.setText(two_line_address_1 + "\n" + two_line_address_2 + "\n" + two_line_address_3);
+
+
+                    break;
+
+                case 5000:
+
+                    String st_nw = msg.getData().getString("Result");
+
+                    location_text.setText(no_internet);
+
+
+                default:
+                    break;
+
+            }
+        }
+    };
 
     @Override
     public void onLeScan(final BluetoothDevice newDevice, final int newRssi, final byte[] newScanRecord) {
@@ -585,6 +681,9 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     @Override
     public void onLocationChanged(Location location) {
 
+        mLastLocation = location;
+
+        getLocation();
     }
 
     @Override
