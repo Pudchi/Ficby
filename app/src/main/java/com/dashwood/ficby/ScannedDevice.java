@@ -131,7 +131,7 @@ public class ScannedDevice {
         x = new double[2];
         double distance = mIBeacon.getDistance();
         String addr = device.getDevice().getAddress();
-        if (addr.equals("E3:7A:AA:95:09:0A")) {//blue
+        if (addr.equals("C7:24:EE:DB:FF:59")) {//blue
             if(blue_times==0){
                 blue_rssimin = blue_rssimax = mIBeacon.getRssi();
                 blue_buf.offer(mIBeacon.getDistance());
@@ -177,7 +177,7 @@ public class ScannedDevice {
                 blue_times++;
             }
             r1 = blue_dis * 240;//藍
-        } else if (addr.equals("E6:18:AB:E5:61:70")) {//green
+        } else if (addr.equals("FA:AD:9D:BC:5B:BB")) {//green
             if(green_times==0){
                 green_rssimin = green_rssimax = mIBeacon.getRssi();
                 green_buf.offer(mIBeacon.getDistance());
@@ -223,7 +223,7 @@ public class ScannedDevice {
                 green_times++;
             }
             r2 = green_dis * 240;
-        } else if (addr.equals("DE:A7:2D:53:BA:E8")) {//purple
+        } else if (addr.equals("C5:C1:C3:5C:5F:31")) {//purple
             if(purple_times==0){
                 purple_rssimin = purple_rssimax = mIBeacon.getRssi();
                 purple_buf.offer(mIBeacon.getDistance());
