@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -21,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,16 +40,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import uk.co.alt236.bluetoothlelib.device.BluetoothLeDevice;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class BeaconActivity extends AppCompatActivity implements BluetoothAdapter.LeScanCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private BluetoothAdapter mBTAdapter;
+    private BLEUtil bleUtil;
+    private BTDeviceStore btDeviceStore;
+    private BTScanner btScanner;
+    private static final Object lockObj = new Object();
     private DeviceAdapter mDeviceAdapter;
     private boolean mIsScanning;
     Typeface typeface_zh_medium;
-    TextView location_text;
+    TextView location_text, textView;
     Button turn_format, get_location, scan;
     ListView deviceListView;
 
@@ -80,6 +84,19 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     private Location mLastLocation;
     private boolean mRequestingLocationUpdates = false;
     private LocationRequest mLocationRequest;
+
+    BluetoothAdapter.LeScanCallback mleScanCallback = new BluetoothAdapter.LeScanCallback() {
+        @Override
+        public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
+            synchronized (lockObj)
+            {
+                final BluetoothLeDevice bluetoothLeDevice = new BluetoothLeDevice(device, rssi, scanRecord, System.currentTimeMillis());
+                btDeviceStore.addDevice(bluetoothLeDevice);
+            }
+        }
+    };
+
+
     Runnable Loc_update = new Runnable() {
         @Override
         public void run() {
@@ -283,7 +300,9 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (scan_button_flag == 0)
+                startActivity(new Intent(BeaconActivity.this, ScanBeaconActivity.class));
+
+                /*if (scan_button_flag == 0)
                 {
                     String start_scan = "start_sc";
                     Message stc = new Message();
@@ -330,7 +349,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
                 {
                     stopScan();
                     scan.setText("SCAN");
-                }
+                }*/
             }
         });
 
@@ -615,8 +634,8 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
 
                 if (summary != null) {
                     if (mDeviceAdapter.clc) {
-                        TextView textView = (TextView) findViewById(R.id.beacon_list_text);
-                        String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
+                        textView = (TextView) findViewById(R.id.beacon_list_text);
+                        final String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
                                 + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage
                                 + "\nRSSI_Min:" + mDeviceAdapter.blue_rssimin
                                 + "\nDIS_MAX:" + mDeviceAdapter.blue_dismax
@@ -637,7 +656,14 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
                                 + "\nDIS_AVG:" + mDeviceAdapter.purple_disaverage
                                 + "\nDIS_Min:" + mDeviceAdapter.purple_dismin
                                 + "\npurpledis:" + mDeviceAdapter.purple_dis;
-                        textView.setText(str);
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                textView.setText(str);
+                            }
+                        });
+
                         mDeviceAdapter.clc = false;
                     }
 
