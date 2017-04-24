@@ -1,9 +1,13 @@
 package com.dashwood.ficby;
 
+import android.*;
+import android.Manifest;
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -14,6 +18,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -25,8 +30,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,19 +49,16 @@ import uk.co.alt236.bluetoothlelib.device.BluetoothLeDevice;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
-public class BeaconActivity extends AppCompatActivity implements BluetoothAdapter.LeScanCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class BeaconActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private BluetoothAdapter mBTAdapter;
-    private BLEUtil bleUtil;
-    private BTDeviceStore btDeviceStore;
-    private BTScanner btScanner;
     private static final Object lockObj = new Object();
     private DeviceAdapter mDeviceAdapter;
     private boolean mIsScanning;
     Typeface typeface_zh_medium;
-    TextView location_text, textView;
-    Button turn_format, get_location, scan;
-    ListView deviceListView;
+    TextView location_text, goto_beacon_hint;
+    Button turn_format, get_location;
+    ImageView goto_beacon;
+
 
     double latitude;
     double longitude;
@@ -74,7 +75,8 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
 
     public static String cant_get_location = "   Sorry... 無法定位\n請更改手機定位設定!";
     public static String no_internet = "請檢查手機是否連上網路\n或是手機定位設定!";
-    public static final int MY_PERMISSIONS_REQUEST_LOCATION = 100;
+    //public static final int MY_PERMISSIONS_REQUEST_LOCATION = 100;
+    private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     static int click_once = 0;
     private static int UPDATE_INTERVAL = 5000; // 5s
     private static int FATEST_INTERVAL = 1000; // 1s
@@ -85,16 +87,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     private boolean mRequestingLocationUpdates = false;
     private LocationRequest mLocationRequest;
 
-    BluetoothAdapter.LeScanCallback mleScanCallback = new BluetoothAdapter.LeScanCallback() {
-        @Override
-        public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
-            synchronized (lockObj)
-            {
-                final BluetoothLeDevice bluetoothLeDevice = new BluetoothLeDevice(device, rssi, scanRecord, System.currentTimeMillis());
-                btDeviceStore.addDevice(bluetoothLeDevice);
-            }
-        }
-    };
+
 
 
     Runnable Loc_update = new Runnable() {
@@ -110,12 +103,13 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     };
     private LocationManager locationManager;
 
+
     public void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(BeaconActivity.this,
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_LOCATION);
+                    PERMISSION_REQUEST_FINE_LOCATION);
         }
     }
 
@@ -123,23 +117,27 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+            case PERMISSION_REQUEST_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Location Permission Granted", Toast.LENGTH_SHORT).show();
 
-                        //Request location updates
-                    }
 
                 } else {
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Functionality limited");
+                    builder.setMessage("未取得位置權限, App 功能可能不如預期");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                        }
+                    });
+                    builder.show();
 
                 }
                 return;
@@ -239,13 +237,14 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
     protected void onResume() {
         super.onResume();
 
-        if ((mBTAdapter != null) && (!mBTAdapter.isEnabled())) {
-            Toast.makeText(this, "藍牙未開啟", Toast.LENGTH_SHORT).show();
-        }
+        //if ((mBTAdapter != null) && (!mBTAdapter.isEnabled())) {
+        //    Toast.makeText(this, "藍牙未開啟", Toast.LENGTH_SHORT).show();
+        //}
 
         mGoogleApiClient.connect();
         checkLocationPermission();
     }
+
 
 
 
@@ -255,22 +254,25 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beacon);
 
-        TextView ble_list = (TextView)findViewById(R.id.beacon_list_text);
+        //TextView ble_list = (TextView)findViewById(R.id.beacon_list_text);
         typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
         //ImageView blue_beacon = (ImageView) findViewById(R.id.blue_beacon);
         //ImageView green_beacon = (ImageView) findViewById(R.id.green_beacon);
         //ImageView purple_beacon = (ImageView) findViewById(R.id.purple_beacon);
-        scan = (Button) findViewById(R.id.btn_scan);
+
         get_location = (Button) findViewById(R.id.btn_locate);
         get_location.setTypeface(typeface_zh_medium);
         turn_format = (Button) findViewById(R.id.btn_change_format);
         turn_format.setTypeface(typeface_zh_medium);
         location_text = (TextView) findViewById(R.id.locate_text);
         location_text.setTypeface(typeface_zh_medium);
-        deviceListView = (ListView) findViewById(R.id.list);
+        goto_beacon = (ImageView) findViewById(R.id.beacon_pic);
+        goto_beacon_hint = (TextView) findViewById(R.id.goto_beacon_text);
+        goto_beacon_hint.setTypeface(typeface_zh_medium);
+        //deviceListView = (ListView) findViewById(R.id.list);
 
-        String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
+        /*String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
                 + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage
                 + "\nRSSI_Min:" + mDeviceAdapter.blue_rssimin
                 + "\nDIS_MAX:" + mDeviceAdapter.blue_dismax
@@ -288,16 +290,33 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
                 + "\nDIS_MAX:" + mDeviceAdapter.purple_dismax
                 + "\nDIS_AVG:" + mDeviceAdapter.purple_disaverage
                 + "\nDIS_Min:" + mDeviceAdapter.purple_dismin;
-        ble_list.setText(str);
-        initialize(1000);
+        ble_list.setText(str);*/
+
 
         buildGoogleApiClient();
-        checkLocationPermission();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (this.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("This app needs location access");
+                builder.setMessage("Please grant location access so this app can detect peripherals.");
+                builder.setPositiveButton(android.R.string.ok, null);
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_FINE_LOCATION);
+                        }
+                    }
+                });
+                builder.show();
+            }
+        }
 
         createLocationRequest();
         getLocation();
 
-        scan.setOnClickListener(new View.OnClickListener() {
+        goto_beacon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(BeaconActivity.this, ScanBeaconActivity.class));
@@ -495,8 +514,51 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         new Thread(update_format_loc).start();
     }
 
+    android.os.Handler loc_handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 2000:
+                    String st = msg.getData().getString("Result");
 
-    private void initialize(final int value)
+
+                    if (loc_flag == 0) {
+                        location_text.setText(locate);
+                    } else {
+                        location_text.setText(cant_get_location);
+                    }
+                    break;
+
+                case 3000:
+                    String st_second = msg.getData().getString("Result");
+
+
+                    String two_line_address_1 = result_address.substring(0, 3);
+                    String two_line_address_2 = result_address.substring(3, 10);
+                    String two_line_address_3 = result_address.substring(10);
+
+                    location_text.setText(two_line_address_1 + "\n" + two_line_address_2 + "\n" + two_line_address_3);
+
+
+                    break;
+
+                case 5000:
+
+                    String st_nw = msg.getData().getString("Result");
+
+                    location_text.setText(no_internet);
+
+
+                default:
+                    break;
+
+            }
+        }
+    };
+
+
+    /*private void initialize(final int value)
     {
         Runnable init = new Runnable() {
             @Override
@@ -554,7 +616,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
 
     }
 
-    android.os.Handler scan_handler = new Handler()
+    /*android.os.Handler scan_handler = new Handler()
     {
         @Override
         public void handleMessage(Message msg) {
@@ -580,48 +642,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
         }
     };
 
-    android.os.Handler loc_handler = new Handler()
-    {
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 2000:
-                    String st = msg.getData().getString("Result");
 
-
-                    if (loc_flag == 0) {
-                        location_text.setText(locate);
-                    } else {
-                        location_text.setText(cant_get_location);
-                    }
-                    break;
-
-                case 3000:
-                    String st_second = msg.getData().getString("Result");
-
-
-                    String two_line_address_1 = result_address.substring(0, 3);
-                    String two_line_address_2 = result_address.substring(3, 10);
-                    String two_line_address_3 = result_address.substring(10);
-
-                    location_text.setText(two_line_address_1 + "\n" + two_line_address_2 + "\n" + two_line_address_3);
-
-
-                    break;
-
-                case 5000:
-
-                    String st_nw = msg.getData().getString("Result");
-
-                    location_text.setText(no_internet);
-
-
-                default:
-                    break;
-
-            }
-        }
-    };
 
     @Override
     public void onLeScan(final BluetoothDevice newDevice, final int newRssi, final byte[] newScanRecord) {
@@ -689,7 +710,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
 
     }
 
-    private void startScan() {
+    /*private void startScan() {
         if ((mBTAdapter != null) && (!mIsScanning)) {
             mBTAdapter.startLeScan(this);
             mIsScanning = true;
@@ -702,7 +723,7 @@ public class BeaconActivity extends AppCompatActivity implements BluetoothAdapte
             mBTAdapter.stopLeScan(this);
         }
         mIsScanning = false;
-    }
+    }*/
 
     @Override
     public void onLocationChanged(Location location) {

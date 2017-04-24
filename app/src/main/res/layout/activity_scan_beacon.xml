@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/scan_bt_pic"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -33,13 +33,46 @@
     <TextView
         android:id="@+id/ble_text"
         android:layout_width="300dp"
-        android:layout_height="270dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scan_text" />
+
+    <ImageView
+        android:id="@+id/blue_beacon"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_text"
+        app:srcCompat="@mipmap/blue_beacon" />
+
+    <ImageView
+        android:id="@+id/purple_beacon"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="261dp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_text"
+        app:srcCompat="@mipmap/purple_beacon" />
+
+    <ImageView
+        android:id="@+id/green_beacon"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="261dp"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan_text"
+        app:srcCompat="@mipmap/green_beacon" />
 
 </android.support.constraint.ConstraintLayout>
