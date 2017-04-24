@@ -22,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
+import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class ScanBeaconActivity extends AppCompatActivity {
 
@@ -31,10 +32,9 @@ public class ScanBeaconActivity extends AppCompatActivity {
     TextView device_text, scan_status;
     private final static int REQUEST_ENABLE_BT = 1;
     private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
-    static int scan_btn_flag = 0;
     ImageView bt_pic_btn, beacon_blue, beacon_green, beacon_purple;
     static String beacon_info = "";
-    Typeface typeface_book;
+    Typeface typeface_book, typeface_zh_medium;
     String mac = "";
 
     private static final long SCAN_PERIOD = 6000; //6 seconds
@@ -46,11 +46,13 @@ public class ScanBeaconActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_beacon);
 
+        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
         typeface_book = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
 
         btHandler = new Handler();
 
         scan_status = (TextView) findViewById(R.id.scan_text);
+        scan_status.setTypeface(typeface_zh_medium);
         device_text = (TextView) findViewById(R.id.ble_text);
         bt_pic_btn = (ImageView) findViewById(R.id.scan_bt_pic);
         beacon_blue = (ImageView) findViewById(R.id.blue_beacon);
@@ -62,18 +64,6 @@ public class ScanBeaconActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 scanLeDevice(true);
-                /*if (scan_btn_flag == 0)
-                {
-                    scan_status.setText("開始掃描");
-                    scan_btn_flag = 1;
-                    startScanning();
-                }
-                else if (scan_btn_flag == 1)
-                {
-                    scan_status.setText("停止掃描");
-                    scan_btn_flag = 0;
-                    stopScanning();
-                }*/
 
             }
         });
@@ -163,7 +153,7 @@ public class ScanBeaconActivity extends AppCompatActivity {
         @Override
         public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
 
-            Log.d("TAG","BLE device : " + device.getName());
+            Log.d("TAG", "BLE device : " + device.getName());
             int startByte = 2;
             boolean patternFound = false;
             // 尋找ibeacon
@@ -172,8 +162,7 @@ public class ScanBeaconActivity extends AppCompatActivity {
                 // Identifies an iBeacon
                 if (((int) scanRecord[startByte + 2] & 0xff) == 0x02 &&
                         // Identifies correct data length
-                        ((int) scanRecord[startByte + 3] & 0xff) == 0x15)
-                {
+                        ((int) scanRecord[startByte + 3] & 0xff) == 0x15) {
                     patternFound = true;
                     break;
                 }
@@ -210,9 +199,9 @@ public class ScanBeaconActivity extends AppCompatActivity {
                 //double distance = calculateAccuracy(txPower,rssi);
 
 
-                 beacon_info = "Mac：" + mac
-                         + "\nUUID：" + uuid + "\nMajor：" + major + "\nMinor："
-                         + minor + "\nTxPower：" + txPower + "\nRSSI：" + rssi + "\n\nDistance："+calculateAccuracy(txPower,rssi);
+                beacon_info = "Mac：" + mac
+                        + "\nUUID：" + uuid + "\nMajor：" + major + "\nMinor："
+                        + minor + "\nTxPower：" + txPower + "\nRSSI：" + rssi + "\n\nDistance：" + calculateAccuracy(txPower, rssi);
 
 
                 device_text.setText(beacon_info);
@@ -248,7 +237,7 @@ public class ScanBeaconActivity extends AppCompatActivity {
                         + " \nUUID：" + uuid + "\nMajor：" + major + "\nMinor："
                         + minor + "\nTxPower：" + txPower + "\nrssi：" + rssi);
 
-                Log.d("BT","distance："+calculateAccuracy(txPower,rssi));
+                Log.d("BT", "distance：" + calculateAccuracy(txPower, rssi));
 
             }
         }
@@ -256,6 +245,35 @@ public class ScanBeaconActivity extends AppCompatActivity {
 
     };
 
+    public String bytesToHex(byte[] bytes) {
+
+        char[] hexArray = "0123456789ABCDEF".toCharArray();
+
+        char[] hexChars = new char[bytes.length * 2];
+        for (int j = 0; j < bytes.length; j++) {
+            int v = bytes[j] & 0xFF;
+            hexChars[j * 2] = hexArray[v >>> 4];
+            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+        }
+        return new String(hexChars);
+    }
+
+    public double calculateAccuracy(int txPower, double rssi) {
+        if (rssi == 0) {
+            return -1.0;
+        }
+
+        double ratio = rssi * 1.0 / txPower;
+
+        if (ratio < 1.0) {
+            return Math.pow(ratio, 10);
+        } else {
+            double accuracy = (0.89976) * Math.pow(ratio, 7.7095) + 0.111;
+            return accuracy;
+        }
+    }
+
+}
     /*private ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
@@ -293,36 +311,3 @@ public class ScanBeaconActivity extends AppCompatActivity {
             }
         });
     }*/
-
-    public String bytesToHex(byte[] bytes) {
-
-        char[] hexArray = "0123456789ABCDEF".toCharArray();
-
-        char[] hexChars = new char[bytes.length * 2];
-        for (int j = 0; j < bytes.length; j++) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-        }
-        return new String(hexChars);
-    }
-
-    public double calculateAccuracy(int txPower, double rssi) {
-        if (rssi == 0)
-        {
-            return -1.0;
-        }
-
-        double ratio = rssi * 1.0 / txPower;
-
-        if (ratio < 1.0)
-        {
-            return Math.pow(ratio, 10);
-        }
-        else
-        {
-            double accuracy = (0.89976) * Math.pow(ratio, 7.7095) + 0.111;
-            return accuracy;
-        }
-    }
-}
