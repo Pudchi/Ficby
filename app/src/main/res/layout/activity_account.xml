@@ -27,7 +27,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/account_pic" />
+        app:srcCompat="@mipmap/account_pic" />
 
     <TextView
         android:id="@+id/account_header"

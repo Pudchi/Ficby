@@ -16,7 +16,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/band_back_pic" />
+        app:srcCompat="@mipmap/circle_login" />
 
     <TextView
         android:id="@+id/band_text"

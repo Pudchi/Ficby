@@ -27,7 +27,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/band_pic"
-        app:srcCompat="@drawable/circle_login" />
+        app:srcCompat="@mipmap/circle_login" />
 
 
     <TextView
