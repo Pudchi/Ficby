@@ -52,7 +52,6 @@ import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 public class BeaconActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private static final Object lockObj = new Object();
-    private DeviceAdapter mDeviceAdapter;
     private boolean mIsScanning;
     Typeface typeface_zh_medium;
     TextView location_text, goto_beacon_hint;
