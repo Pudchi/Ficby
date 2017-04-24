@@ -109,7 +109,7 @@ public class ScanBTActivity extends AppCompatActivity {
                 mDeviceList.add(device.getName() + "\n" + device.getAddress());
                 Log.i("BT", device.getName() + "\n" + device.getAddress());
                 bt_device_list.setAdapter(new ArrayAdapter<String>(context,
-                        android.R.layout.simple_list_item_1, mDeviceList));
+                        R.layout.list_item, mDeviceList));
             }
         }
     };
