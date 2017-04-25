@@ -72,13 +72,13 @@ public class ScanBTActivity extends AppCompatActivity {
         device_text = (TextView) findViewById(R.id.bt_device_text);
         device_text.setTypeface(typeface_book);
 
-        bt_click.setOnClickListener(new View.OnClickListener() {
+        /*bt_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                startScanning();
+
             }
-        });
+        });*/
 
 
         btManager = (BluetoothManager)getSystemService(Context.BLUETOOTH_SERVICE);
@@ -89,6 +89,7 @@ public class ScanBTActivity extends AppCompatActivity {
             Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableIntent,REQUEST_ENABLE_BT);
         }
+        startScanning();
 
         if (Build.VERSION.SDK_INT >= 23) {
             if (this.checkSelfPermission(android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
