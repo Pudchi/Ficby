@@ -1,11 +1,7 @@
 package com.dashwood.ficby;
 
-import android.*;
 import android.Manifest;
 import android.app.AlertDialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -40,11 +36,8 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-import uk.co.alt236.bluetoothlelib.device.BluetoothLeDevice;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;

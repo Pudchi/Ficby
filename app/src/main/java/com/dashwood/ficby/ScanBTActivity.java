@@ -1,19 +1,14 @@
 package com.dashwood.ficby;
 
-import android.*;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
-
 import android.bluetooth.le.ScanResult;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -22,19 +17,8 @@ import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import com.zhaoxiaodan.miband.MiBand;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
 import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
@@ -109,8 +93,6 @@ public class ScanBTActivity extends AppCompatActivity {
             }
 
         }
-
-
     }
 
     @Override
