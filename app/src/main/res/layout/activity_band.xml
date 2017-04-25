@@ -38,8 +38,7 @@
         android:layout_height="200dp"
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:layout_marginTop="13dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/band_pic">
@@ -56,12 +55,12 @@
         android:id="@+id/btn_connect_band"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/button_default"
         android:text="連接手環"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_chart_base"
@@ -71,16 +70,30 @@
         android:id="@+id/btn_draw_line_chart"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/button_default"
         android:text="產生圖表"
         android:textColor="#000000"
         android:textSize="24sp"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.962"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_chart_base"
-        android:layout_marginRight="8dp" />
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:id="@+id/warn_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:text="尚未連接手環!\n請先連結手環才能獲得心率數據!"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_connect_band" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -19,18 +19,18 @@ import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class BandActivity extends AppCompatActivity {
 
-    TextView band_text;
+    TextView band_text, warn;
     Typeface typeface_zh_medium;
     Button draw, connect_band;
     int data_random = 8;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    private final static int REQUEST_ENABLE_BT=1;
-    //private final static int DISABLE_BT = 0;
+    static int bind_band_result = 0;
 
     LineView lineView;
     ArrayList <String> x_value = new ArrayList<String>();
     ArrayList <String> y_value = new ArrayList<String>();
     String[] heart_rate = new String[] {"75", "80", "85", "90", "95", "100", "105", "110"};
+    int[] hr_stable = new int[] {86, 88, 84, 81, 84, 106, 93, 108};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,24 +48,30 @@ public class BandActivity extends AppCompatActivity {
         connect_band.setTypeface(typeface_zh_medium);
         draw = (Button) findViewById(R.id.btn_draw_line_chart);
         draw.setTypeface(typeface_zh_medium);
+        warn = (TextView)findViewById(R.id.warn_text);
+        warn.setTypeface(typeface_zh_medium);
 
         initLineView(lineView);
 
         draw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawLineChart(lineView);
+                if (bind_band_result == 0)
+                {
+                    warn.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    drawLineChart(lineView);
+                }
+
             }
         });
 
         connect_band.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!bluetoothAdapter.isEnabled())
-                {
-                    Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivityForResult(enableBluetooth, REQUEST_ENABLE_BT);
-                }
+
                 startActivity(new Intent(BandActivity.this, ScanBTActivity.class));
             }
         });
@@ -100,8 +106,8 @@ public class BandActivity extends AppCompatActivity {
     private void drawLineChart(LineView lineView) {
         ArrayList<Integer> dataList = new ArrayList<>();
         //float random = (float)(Math.random()*41+70);
-        for (int i=0; i<data_random; i++){
-            dataList.add((int)(Math.random()*51+60));
+        for (int i=0; i<hr_stable.length; i++){
+            dataList.add(hr_stable[i]);
         }
         ArrayList<ArrayList<Integer>> linedataList = new ArrayList<>();
         linedataList.add(dataList);
@@ -110,5 +116,9 @@ public class BandActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        warn.setVisibility(View.INVISIBLE);
+    }
 }
