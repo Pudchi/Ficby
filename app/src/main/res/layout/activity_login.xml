@@ -147,5 +147,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@+id/band_pic" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/check_animation"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="283dp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progressBar"
+        app:lottie_fileName="check_pop.json" />
+
 
 </android.support.constraint.ConstraintLayout>

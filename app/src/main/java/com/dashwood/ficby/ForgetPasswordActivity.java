@@ -1,6 +1,7 @@
 package com.dashwood.ficby;
 
 import android.graphics.Typeface;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,7 +29,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     Typeface typeface_zh_medium, typeface_regular;
-    //LottieAnimationView mail_animation;
+    LottieAnimationView mail_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         reset = (Button) findViewById(R.id.btn_reset);
         reset.setTypeface(typeface_zh_medium);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mail_animation = (LottieAnimationView) findViewById(R.id.mail_sent_animation);
 
         auth = FirebaseAuth.getInstance();
 
@@ -60,6 +63,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                 }
 
 
+
                 progressBar.setVisibility(View.VISIBLE);
 
                 auth.sendPasswordResetEmail(mail)
@@ -68,7 +72,23 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if ((task.isSuccessful()))
                                 {
-                                    Toast.makeText(ForgetPasswordActivity.this, "信件已寄出!", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(ForgetPasswordActivity.this, "信件已寄出!", Toast.LENGTH_SHORT).show();
+                                    mail_animation.setVisibility(View.VISIBLE);
+                                    mail_animation.playAnimation();
+                                    new CountDownTimer(5000, 1000)
+                                    {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            mail_animation.setVisibility(View.INVISIBLE);
+                                            finish();
+                                        }
+                                    }.start();
+                                    //finish();
                                 }
                                 else
                                 {

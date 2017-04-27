@@ -2,6 +2,7 @@ package com.dashwood.ficby;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     Typeface typeface_regular, typeface_zh_medium;
     ProgressBar progressBar;
     private FirebaseAuth auth;
+    LottieAnimationView check_pop_anim;
     //String mail = "";
 
 
@@ -63,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         sign_up = (Button) findViewById(R.id.btn_signup);
         sign_up.setTypeface(typeface_zh_medium);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        check_pop_anim = (LottieAnimationView) findViewById(R.id.check_animation);
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                                 {
                                     if (passwd.length() < 6)
                                     {
-                                        input_password.setError("密碼太短!! 需大於6個字元");
+                                        input_password.setError("密碼太短!! 至少6個字元");
                                         //Toast.makeText(getApplicationContext(), "密碼太短!!需大於6個字元", Toast.LENGTH_SHORT).show();
                                     }
                                     else
@@ -119,9 +123,24 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                                 else
                                 {
-                                    Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    check_pop_anim.setVisibility(View.VISIBLE);
+                                    check_pop_anim.playAnimation();
+                                    new CountDownTimer(1000, 1000)
+                                    {
+                                        @Override
+                                        public void onTick(long millisUntilFinished) {
+
+                                        }
+
+                                        @Override
+                                        public void onFinish() {
+                                            check_pop_anim.cancelAnimation();
+                                            check_pop_anim.setVisibility(View.INVISIBLE);
+                                            Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }.start();
                                 }
                             }
                         });
