@@ -35,8 +35,10 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'uk.co.alt236:bluetooth-le-library-android:1.0.0'
     compile 'im.dacer:AndroidCharts:1.0.3'
+    compile 'com.airbnb.android:lottie:2.0.0-beta4'
     testCompile 'junit:junit:4.12'
 }
+
 
 
 

@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
-        //typeface_zh_normal = Typeface.createFromAsset(getAssets(), SOFT_NORMAL);
-        //typeface_zh_regular = Typeface.createFromAsset(getAssets(), SOFT_REGULAR);
         typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
 

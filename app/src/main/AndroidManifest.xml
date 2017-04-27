@@ -21,13 +21,14 @@
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyAjdthAXWqiXApMgUrw75WWCuwjywEkKz0" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ForgetPasswordActivity" />
@@ -38,7 +39,7 @@
             android:theme="@style/Transparent" />
         <activity android:name=".BeaconActivity" />
         <activity android:name=".MoreActivity" />
-        <activity android:name=".ScanBeaconActivity"></activity>
+        <activity android:name=".ScanBeaconActivity" />
     </application>
 
 </manifest>

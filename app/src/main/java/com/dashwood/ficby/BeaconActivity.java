@@ -44,8 +44,6 @@ import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class BeaconActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-    private static final Object lockObj = new Object();
-    private boolean mIsScanning;
     Typeface typeface_zh_medium;
     TextView location_text, goto_beacon_hint;
     Button turn_format, get_location;
@@ -67,7 +65,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
 
     public static String cant_get_location = "   Sorry... 無法定位\n請更改手機定位設定!";
     public static String no_internet = "請檢查手機是否連上網路\n或是手機定位設定!";
-    //public static final int MY_PERMISSIONS_REQUEST_LOCATION = 100;
     private static final int PERMISSION_REQUEST_FINE_LOCATION = 1;
     static int click_once = 0;
     private static int UPDATE_INTERVAL = 5000; // 5s
@@ -249,9 +246,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
         //TextView ble_list = (TextView)findViewById(R.id.beacon_list_text);
         typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
-        //ImageView blue_beacon = (ImageView) findViewById(R.id.blue_beacon);
-        //ImageView green_beacon = (ImageView) findViewById(R.id.green_beacon);
-        //ImageView purple_beacon = (ImageView) findViewById(R.id.purple_beacon);
 
         get_location = (Button) findViewById(R.id.btn_locate);
         get_location.setTypeface(typeface_zh_medium);
@@ -262,7 +256,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
         goto_beacon = (ImageView) findViewById(R.id.beacon_pic);
         goto_beacon_hint = (TextView) findViewById(R.id.goto_beacon_text);
         goto_beacon_hint.setTypeface(typeface_zh_medium);
-        //deviceListView = (ListView) findViewById(R.id.list);
 
         /*String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
                 + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage
@@ -313,54 +306,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
             public void onClick(View v) {
                 startActivity(new Intent(BeaconActivity.this, ScanBeaconActivity.class));
 
-                /*if (scan_button_flag == 0)
-                {
-                    String start_scan = "start_sc";
-                    Message stc = new Message();
-                    stc.what = 4000;
-                    Bundle bd_start = new Bundle();
-
-                    scan.setText("STOP");
-                    scan_button_flag = 1;
-                    Toast.makeText(getApplicationContext(), "SCANNING...", Toast.LENGTH_SHORT).show();
-
-                    bd_start.putString("Result", start_scan);
-                    stc.setData(bd_start);
-                    scan_handler.sendMessage(stc);
-                }
-                else if (scan_button_flag == 1)
-                {
-                    String stop_scan = "stop_sc";
-                    Message spc = new Message();
-                    spc.what = 6000;
-                    Bundle bd_stop = new Bundle();
-
-                    scan.setText("STOP");
-                    scan_button_flag = 0;
-                    Toast.makeText(getApplicationContext(), "STOP SCANNING...", Toast.LENGTH_SHORT).show();
-
-                    bd_stop.putString("STOP", stop_scan);
-                    spc.setData(bd_stop);
-                    scan_handler.sendMessage(spc);
-                }
-
-
-                if (scan.getText().toString() == "SCAN")
-                {
-                    if (!mBTAdapter.isEnabled())
-                    {
-                        Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                        startActivityForResult(enableBluetooth, 1);
-                    }
-                    startScan();
-
-                }
-
-                else if (scan.getText().toString() == "STOP")
-                {
-                    stopScan();
-                    scan.setText("SCAN");
-                }*/
             }
         });
 
@@ -383,14 +328,14 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
                 if (format_button_flag == 0 && is_Connecting_to_internet())
                 {
                     //turn_format.setText("經緯度");
-                    //Toast.makeText(getApplication(), "已轉換成地址!", Toast.LENGTH_SHORT).show();
+
                     format_button_flag = 1;
                     turn_loc_view(3000);
 
                 } else if (format_button_flag == 1 && is_Connecting_to_internet())
                 {
                     //turn_format.setText("地址");
-                    //Toast.makeText(getApplication(), "已轉換成經緯度!", Toast.LENGTH_SHORT).show();
+
                     format_button_flag = 0;
                     get_location_view(2000);
 
