@@ -27,6 +27,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     Typeface typeface_zh_medium, typeface_regular;
+    //LottieAnimationView mail_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +58,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                     //Toast.makeText(getApplication(), "Mail不能為空!", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
 
                 progressBar.setVisibility(View.VISIBLE);
 
