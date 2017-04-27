@@ -18,7 +18,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="welcome.json"
-        app:lottie_loop="true" />
+        app:lottie_loop="true"
+        app:layout_constraintHorizontal_bias="0.56" />
 
     <ImageView
         android:id="@+id/app_icon"
@@ -29,7 +30,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ficby_hi_res"
-        app:layout_constraintHorizontal_bias="0.53" />
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <ImageView
         android:id="@+id/beacon"
@@ -50,7 +51,17 @@
         app:srcCompat="@mipmap/bluetooth_icon"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.501" />
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <ImageView
+        android:id="@+id/firebase"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="340dp"
+        app:layout_constraintLeft_toRightOf="@+id/bluetooth"
+        app:layout_constraintTop_toTopOf="@+id/welcome_animation"
+        app:srcCompat="@mipmap/firebase" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/welcome_loader"
@@ -62,16 +73,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:lottie_autoPlay="true"
         app:lottie_fileName="infinity_loader.json"
-        app:lottie_loop="true" />
-
-    <ImageView
-        android:id="@+id/firebase"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@mipmap/firebase"
-        app:layout_constraintTop_toTopOf="@+id/welcome_animation"
-        android:layout_marginTop="340dp"
-        app:layout_constraintLeft_toRightOf="@+id/bluetooth"
-        android:layout_marginLeft="36dp" />
+        app:lottie_loop="true"
+        app:layout_constraintHorizontal_bias="0.5" />
 
 </android.support.constraint.ConstraintLayout>
