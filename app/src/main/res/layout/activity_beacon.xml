@@ -7,15 +7,17 @@
     android:background="#004d40"
     tools:context="com.dashwood.ficby.BeaconActivity">
 
-    <ImageView
-        android:id="@+id/locate_pic"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginRight="105dp"
-        android:layout_marginTop="4dp"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/locate_animation"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/locate" />
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="location.json"
+        app:lottie_loop="true" />
 
     <ImageView
         android:id="@+id/beacon_pic"
@@ -32,38 +34,38 @@
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="140dp"
         android:background="@drawable/button_default"
         android:text="經緯度"
         android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locate_pic" />
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/locate_text" />
 
     <Button
         android:id="@+id/btn_change_format"
         android:layout_width="130dp"
         android:layout_height="50dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="140dp"
         android:background="@drawable/button_default"
         android:text="地址"
         android:textSize="30sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locate_pic" />
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@+id/locate_text" />
 
     <TextView
         android:id="@+id/locate_text"
         android:layout_width="200dp"
         android:layout_height="110dp"
         android:layout_marginRight="80dp"
-        android:layout_marginTop="16dp"
         android:gravity="center_horizontal"
         android:text="點擊 經緯度\n獲取位置\n點擊 地址\n轉換大略地址"
         android:textAlignment="center"
         android:textColor="#e0f7fa"
         android:textSize="20sp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/locate_pic" />
+        app:layout_constraintTop_toTopOf="@+id/locate_animation"
+        android:layout_marginTop="158dp" />
 
     <TextView
         android:id="@+id/goto_beacon_text"

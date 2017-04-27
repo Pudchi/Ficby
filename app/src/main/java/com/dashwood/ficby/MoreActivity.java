@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
 import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
@@ -23,6 +25,7 @@ public class MoreActivity extends AppCompatActivity {
     final static String intro_en = "F-I-C means\nFriendly iHealth Cloud\n\ncombined above concepts\nFICBY stands for\nHealth Assistant";
 
     static int intro_flag = 0;
+    LottieAnimationView core_animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class MoreActivity extends AppCompatActivity {
         typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
         info = (TextView) findViewById(R.id.info_text);
         info.setTypeface(typeface_book);
+        core_animation = (LottieAnimationView) findViewById(R.id.core_animation);
 
         info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,5 +54,25 @@ public class MoreActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        core_animation.cancelAnimation();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        core_animation.cancelAnimation();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        core_animation.playAnimation();
     }
 }

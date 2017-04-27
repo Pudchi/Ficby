@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -48,6 +49,7 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
     TextView location_text, goto_beacon_hint;
     Button turn_format, get_location;
     ImageView goto_beacon;
+    LottieAnimationView locate_animation;
 
 
     double latitude;
@@ -215,11 +217,19 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        locate_animation.cancelAnimation();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
+
+        locate_animation.cancelAnimation();
     }
 
     @Override
@@ -232,6 +242,7 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
 
         mGoogleApiClient.connect();
         checkLocationPermission();
+        locate_animation.playAnimation();
     }
 
 
@@ -256,6 +267,7 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
         goto_beacon = (ImageView) findViewById(R.id.beacon_pic);
         goto_beacon_hint = (TextView) findViewById(R.id.goto_beacon_text);
         goto_beacon_hint.setTypeface(typeface_zh_medium);
+        locate_animation = (LottieAnimationView) findViewById(R.id.locate_animation);
 
         /*String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
                 + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage

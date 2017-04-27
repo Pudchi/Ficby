@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Typeface typeface_bold, typeface_regular
             ,typeface_zh_medium;
 
+    LottieAnimationView main_animation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
         typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
 
+        main_animation = (LottieAnimationView) findViewById(R.id.main_animation);
 
         app_logo = (TextView) findViewById(R.id.app_logo);
         app_logo.setTypeface(typeface_bold);
@@ -76,5 +81,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        main_animation.playAnimation();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        main_animation.cancelAnimation();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        main_animation.cancelAnimation();
+    }
 }
