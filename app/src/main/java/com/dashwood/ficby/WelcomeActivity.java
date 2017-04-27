@@ -33,6 +33,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
-        }, 10000);
+        }, 6000);
     }
 }
