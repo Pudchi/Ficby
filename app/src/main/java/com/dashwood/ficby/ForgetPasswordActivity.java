@@ -75,7 +75,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
                                     //Toast.makeText(ForgetPasswordActivity.this, "信件已寄出!", Toast.LENGTH_SHORT).show();
                                     mail_animation.setVisibility(View.VISIBLE);
                                     mail_animation.playAnimation();
-                                    new CountDownTimer(5000, 1000)
+                                    new CountDownTimer(mail_animation.getDuration(), 1000)
                                     {
                                         @Override
                                         public void onTick(long millisUntilFinished) {
