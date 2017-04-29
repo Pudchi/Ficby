@@ -16,7 +16,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ficby_launcher"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name="android.support.multidex.MultiDexApplication">
         <meta-data
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyAjdthAXWqiXApMgUrw75WWCuwjywEkKz0" />

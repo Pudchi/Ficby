@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,20 +29,16 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.gms:play-services:10.2.1'
-    compile 'com.google.firebase:firebase-database:10.0.1'
+    //compile 'com.google.android.gms:play-services-location:10.2.1'
+    compile 'com.google.firebase:firebase-database:10.2.1'
     compile 'com.google.firebase:firebase-auth:10.2.1'
-    compile 'org.altbeacon:android-beacon-library:2.+'
+    //compile 'org.altbeacon:android-beacon-library:2.+'
     compile 'com.zhaoxiaodan.miband:miband-sdk:1.1.2'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'im.dacer:AndroidCharts:1.0.3'
     compile 'com.airbnb.android:lottie:2.0.0-beta4'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:multidex:1.0.1'
 }
-
-
-
-
-
-
 
 apply plugin: 'com.google.gms.google-services'
