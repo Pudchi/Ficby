@@ -31,45 +31,86 @@
         app:lottie_fileName="touch_id.json"
         app:lottie_loop="false" />
 
-    <TextView
-        android:id="@+id/account_header"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+    <Button
+        android:id="@+id/btn_account"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="220dp"
+        android:background="@drawable/button_notpress"
         android:text="帳號"
-        android:textColor="#ef5350"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/band_pic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/account_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
         android:text="XXX"
         android:textColor="#efebe9"
-        android:textSize="28sp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_header" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account" />
+
+    <EditText
+        android:id="@+id/input_id"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:hint="填入使用者ID  (至少6個字元)"
+        android:inputType="textVisiblePassword"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account" />
+
+    <Button
+        android:id="@+id/btn_set_id"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/button_default"
+        android:text="送出"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account" />
+
+    <Button
+        android:id="@+id/btn_heart_rate"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:background="@drawable/button_default"
+        android:text="心率歷史"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginLeft="27dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="73dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account" />
 
     <Button
         android:id="@+id/btn_logout"
         android:layout_width="130dp"
         android:layout_height="50dp"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="73dp"
         android:background="@drawable/button_default"
         android:text="登出"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/account_header" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_account"
+        android:layout_marginRight="27dp"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/btn_backto_main"
@@ -88,10 +129,10 @@
         android:id="@+id/circle_animation"
         android:layout_width="300dp"
         android:layout_height="175dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="169dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logout"
+        app:layout_constraintTop_toBottomOf="@+id/btn_account"
         app:lottie_autoPlay="true"
         app:lottie_fileName="ai_white_circle.json"
         app:lottie_loop="true" />
