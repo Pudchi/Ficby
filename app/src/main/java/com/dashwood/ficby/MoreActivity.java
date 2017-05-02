@@ -5,11 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import com.airbnb.lottie.LottieAnimationView;
 
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class MoreActivity extends AppCompatActivity {
 
@@ -32,8 +29,8 @@ public class MoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more);
 
-        typeface_book = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        typeface_book = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
         info = (TextView) findViewById(R.id.info_text);
         info.setTypeface(typeface_book);
         core_animation = (LottieAnimationView) findViewById(R.id.core_animation);

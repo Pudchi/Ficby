@@ -18,16 +18,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOLD;
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
-
 public class SignupActivity extends AppCompatActivity {
 
     Button backto_login, sign_up;
     EditText input_mail, input_password;
     TextView signup_text;
-    Typeface typeface_bold, typeface_regular, typeface_zh_medium;
+    Typeface typeface_regular, typeface_zh_medium;
     //String mail = "";
 
     private ProgressBar progressBar;
@@ -40,9 +36,9 @@ public class SignupActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
-        typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        //typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
+        typeface_regular = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
 
         signup_text = (TextView) findViewById(R.id.sign_up_text);
         signup_text.setTypeface(typeface_zh_medium);

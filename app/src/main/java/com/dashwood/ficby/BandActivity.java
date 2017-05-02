@@ -9,13 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
-
 import im.dacer.androidcharts.LineView;
-
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class BandActivity extends AppCompatActivity {
 
@@ -37,7 +32,7 @@ public class BandActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_band);
 
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
         //BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
         band_text = (TextView) findViewById(R.id.band_text);

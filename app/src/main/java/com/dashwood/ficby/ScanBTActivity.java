@@ -19,8 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class ScanBTActivity extends AppCompatActivity {
 
@@ -48,8 +46,8 @@ public class ScanBTActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_bt);
 
 
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
-        typeface_book = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
+        typeface_book = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
         bt_click = (ImageView) findViewById(R.id.scan_bt_pic);
         scanned_text = (TextView) findViewById(R.id.scan_text);
         scanned_text.setTypeface(typeface_zh_medium);

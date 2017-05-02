@@ -13,8 +13,6 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -31,8 +29,8 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
-        typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        typeface_regular = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
 
         auth = FirebaseAuth.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();

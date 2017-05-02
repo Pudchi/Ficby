@@ -41,7 +41,6 @@ import java.util.List;
 import java.util.Locale;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
 
 public class BeaconActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -60,7 +59,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
     static int loc_update_hit = 0;
     static int loc_flag = 0;
     static int format_button_flag = 0;
-    static int scan_button_flag =0;
     public int c = 0;
     public double i = 0, j = 0;
 
@@ -255,7 +253,7 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
         setContentView(R.layout.activity_beacon);
 
         //TextView ble_list = (TextView)findViewById(R.id.beacon_list_text);
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
 
 
         get_location = (Button) findViewById(R.id.btn_locate);
@@ -268,27 +266,6 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
         goto_beacon_hint = (TextView) findViewById(R.id.goto_beacon_text);
         goto_beacon_hint.setTypeface(typeface_zh_medium);
         locate_animation = (LottieAnimationView) findViewById(R.id.locate_animation);
-
-        /*String str = "Blue\nRSSI_MAX:" + mDeviceAdapter.blue_rssimax
-                + "\nRSSI_AVG:" + mDeviceAdapter.blue_rssiaverage
-                + "\nRSSI_Min:" + mDeviceAdapter.blue_rssimin
-                + "\nDIS_MAX:" + mDeviceAdapter.blue_dismax
-                + "\nDIS_AVG:" + mDeviceAdapter.blue_disaverage
-                + "\nDIS_Min:" + mDeviceAdapter.blue_dismin
-                + "\nGreen\nRSSI_MAX:" + mDeviceAdapter.green_rssimax
-                + "\nRSSI_AVG:" + mDeviceAdapter.green_rssiaverage
-                + "\nRSSI_Min:" + mDeviceAdapter.green_rssimin
-                + "\nDIS_MAX:" + mDeviceAdapter.green_dismax
-                + "\nDIS_AVG:" + mDeviceAdapter.green_disaverage
-                + "\nDIS_Min:" + mDeviceAdapter.green_dismin
-                + "\nPurple\nRSSI_MAX:" + mDeviceAdapter.purple_rssimax
-                + "\nRSSI_AVG:" + mDeviceAdapter.purple_rssiaverage
-                + "\nRSSI_Min:" + mDeviceAdapter.purple_rssimin
-                + "\nDIS_MAX:" + mDeviceAdapter.purple_dismax
-                + "\nDIS_AVG:" + mDeviceAdapter.purple_disaverage
-                + "\nDIS_Min:" + mDeviceAdapter.purple_dismin;
-        ble_list.setText(str);*/
-
 
         buildGoogleApiClient();
 
@@ -329,27 +306,27 @@ public class BeaconActivity extends AppCompatActivity implements GoogleApiClient
                 new Thread(Loc_update).start();
                 Log.d("Thread: ", "Update_loc Thread start!");
 
-                loc_update_hit++;
+                loc_update_hit = 1;
                 click_once++;
+
             }
         });
 
         turn_format.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (format_button_flag == 0 && is_Connecting_to_internet())
+                if (loc_update_hit == 1 && is_Connecting_to_internet())
                 {
                     //turn_format.setText("經緯度");
 
-                    format_button_flag = 1;
+                    loc_update_hit = 0 ;
                     turn_loc_view(3000);
 
-                } else if (format_button_flag == 1 && is_Connecting_to_internet())
+                } else if (loc_update_hit == 0 && is_Connecting_to_internet())
                 {
                     //turn_format.setText("地址");
 
-                    format_button_flag = 0;
-                    get_location_view(2000);
+                    Toast.makeText(getApplicationContext(), "請先獲得經緯度位置才能轉換地址!", Toast.LENGTH_LONG).show();
 
                 } else {
                     String result_nw = "Network Problem";

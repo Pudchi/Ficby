@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        typeface_bold = Typeface.createFromAsset(getAssets(), CIRCULAR_BOLD);
-        typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
+        typeface_bold = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_bold.ttf");
+        typeface_regular = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
 
         main_animation = (LottieAnimationView) findViewById(R.id.main_animation);
 

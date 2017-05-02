@@ -21,9 +21,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
-
 public class ScanBeaconActivity extends AppCompatActivity {
 
     BluetoothManager btManager;
@@ -46,8 +43,8 @@ public class ScanBeaconActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan_beacon);
 
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
-        typeface_book = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
+        typeface_book = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
 
         btHandler = new Handler();
 

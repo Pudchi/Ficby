@@ -18,9 +18,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-import static com.dashwood.ficby.MainActivity.CIRCULAR_BOOK;
-import static com.dashwood.ficby.MainActivity.SOFT_MEDIUM;
-
 public class ForgetPasswordActivity extends AppCompatActivity {
 
     EditText input_mail;
@@ -36,8 +33,8 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
 
-        typeface_zh_medium = Typeface.createFromAsset(getAssets(), SOFT_MEDIUM);
-        typeface_regular = Typeface.createFromAsset(getAssets(), CIRCULAR_BOOK);
+        typeface_zh_medium = TypefaceProvider.getTypeFace(getApplicationContext(), "Noto_Sans_Soft_Medium.ttf");
+        typeface_regular = TypefaceProvider.getTypeFace(getApplicationContext(), "Circular_book.ttf");
 
         forget_text = (TextView) findViewById(R.id.forget_text);
         forget_text.setTypeface(typeface_zh_medium);
