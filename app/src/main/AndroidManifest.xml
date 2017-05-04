@@ -17,10 +17,14 @@
         android:roundIcon="@mipmap/ficby_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="android.support.multidex.MultiDexApplication">
+        android:name="android.support.multidex.MultiDexApplication"
+        android:resizeableActivity="true">
         <meta-data
             android:name="com.google.android.nearby.messages.API_KEY"
             android:value="AIzaSyAjdthAXWqiXApMgUrw75WWCuwjywEkKz0" />
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
 
         <activity android:name=".WelcomeActivity">
             <intent-filter>
