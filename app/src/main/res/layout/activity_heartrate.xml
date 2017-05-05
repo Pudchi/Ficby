@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1a237e"
+    tools:context="com.dashwood.ficby.HeartrateActivity">
+
+    <ImageView
+        android:id="@+id/ficby_pic"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintRight_toLeftOf="@+id/four_bar_loop_anim"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ficby_hi_res" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/four_bar_loop_anim"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="four_bar_loop.json"
+        app:lottie_loop="true"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/firebase_pic"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="18dp"
+        app:layout_constraintLeft_toRightOf="@+id/four_bar_loop_anim"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/firebase" />
+
+    <ListView
+        android:id="@+id/heartrate_list"
+        android:layout_width="200dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="26dp"
+        android:divider="@color/divider"
+        android:dividerHeight="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ficby_pic" />
+
+
+</android.support.constraint.ConstraintLayout>

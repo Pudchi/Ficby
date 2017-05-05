@@ -165,6 +165,7 @@ public class ScanBTActivity extends AppCompatActivity {
             public void run() {
                 btScanner.stopScan(leScanCallback);
                 BandActivity.bind_band_result = 1;
+                BandActivity.bind_band_count++;
                 finish();
             }
         });

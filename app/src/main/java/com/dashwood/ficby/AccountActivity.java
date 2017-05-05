@@ -148,6 +148,13 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
+        heart_rate_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AccountActivity.this, HeartrateActivity.class));
+            }
+        });
+
 
 
         log_out.setOnClickListener(new View.OnClickListener() {

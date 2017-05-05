@@ -20,12 +20,14 @@ public class BandActivity extends AppCompatActivity {
     int data_random = 8;
     BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     static int bind_band_result = 0;
+    static int bind_band_count = 0;
 
     LineView lineView;
     ArrayList <String> x_value = new ArrayList<String>();
     ArrayList <String> y_value = new ArrayList<String>();
     String[] heart_rate = new String[] {"75", "80", "85", "90", "95", "100", "105", "110"};
     int[] hr_stable = new int[] {86, 88, 84, 81, 84, 106, 93, 108};
+    int[] hr_stable_add = new int[] {86, 88, 84, 81, 89, 106, 93, 108, 96, 80};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +87,7 @@ public class BandActivity extends AppCompatActivity {
             y_val.add(heart_rate[x]);
         }
 
-        for (int i=0; i<data_random; i++)
+        for (int i=0; i<hr_stable_add.length; i++)
         {
             x_val.add(String.valueOf(i+1));
         }
@@ -99,15 +101,29 @@ public class BandActivity extends AppCompatActivity {
     }
 
     private void drawLineChart(LineView lineView) {
-        ArrayList<Integer> dataList = new ArrayList<>();
-        //float random = (float)(Math.random()*41+70);
-        for (int i=0; i<hr_stable.length; i++){
-            dataList.add(hr_stable[i]);
-        }
-        ArrayList<ArrayList<Integer>> linedataList = new ArrayList<>();
-        linedataList.add(dataList);
 
-        lineView.setDataList(linedataList);
+        /*if (bind_band_count == 1) {
+            ArrayList<Integer> dataList = new ArrayList<>();
+            //float random = (float)(Math.random()*41+70);
+            for (int i = 0; i < hr_stable.length; i++) {
+                dataList.add(hr_stable[i]);
+            }
+            ArrayList<ArrayList<Integer>> linedataList = new ArrayList<>();
+            linedataList.add(dataList);
+
+            lineView.setDataList(linedataList);
+        }*/
+
+            ArrayList<Integer> dataList_add = new ArrayList<>();
+            //float random = (float)(Math.random()*41+70);
+            for (int i = 0; i < hr_stable_add.length; i++) {
+                dataList_add.add(hr_stable_add[i]);
+            }
+            ArrayList<ArrayList<Integer>> linedataList = new ArrayList<>();
+            linedataList.add(dataList_add);
+
+            lineView.setDataList(linedataList);
+
 
     }
 
