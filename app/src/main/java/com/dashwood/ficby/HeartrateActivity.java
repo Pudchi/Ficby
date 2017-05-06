@@ -52,6 +52,7 @@ public class HeartrateActivity extends AppCompatActivity {
                 FirebaseUser user_tmp = firebaseAuth.getCurrentUser();
                 if (user_tmp == null)
                 {
+                    finish();
                 }
             }
         };
