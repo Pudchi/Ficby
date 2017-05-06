@@ -140,7 +140,7 @@ public class AccountActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "設定成功! 可同步心率數據至資料庫!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "設定成功! 可同步及獲取資料庫心率歷史!", Toast.LENGTH_LONG).show();
                                     finish();
                                 }
                             }
@@ -151,7 +151,16 @@ public class AccountActivity extends AppCompatActivity {
         heart_rate_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AccountActivity.this, HeartrateActivity.class));
+                String id_tmp = user.getDisplayName();
+                if (!TextUtils.isEmpty(id_tmp))
+                {
+                    startActivity(new Intent(AccountActivity.this, HeartrateActivity.class));
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "請先點擊帳號設定ID!", Toast.LENGTH_LONG ).show();
+                }
+
             }
         });
 
