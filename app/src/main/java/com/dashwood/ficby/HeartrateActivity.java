@@ -2,15 +2,18 @@ package com.dashwood.ficby;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +32,11 @@ public class HeartrateActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser user;
 
+    LottieAnimationView eye_loading;
+
     Typeface typeface_book;
+
+    int[] hr_stable_add = new int[] {86, 88, 84, 81, 89, 106, 93, 108, 96, 80};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,8 @@ public class HeartrateActivity extends AppCompatActivity {
         bar_loop = (LottieAnimationView) findViewById(R.id.four_bar_loop_anim);
 
         heartrate_list = (ListView) findViewById(R.id.heartrate_list);
+
+        eye_loading = (LottieAnimationView) findViewById(R.id.eye_load);
 
 
 
@@ -72,15 +81,50 @@ public class HeartrateActivity extends AppCompatActivity {
 
         heartrate_list.setAdapter(adapter);
 
-        DatabaseReference reference_heartrate = FirebaseDatabase.getInstance().getReference("userid/"+user.getDisplayName());
+        //"userid/"+user.getDisplayName()
+        final DatabaseReference reference_heartrate = FirebaseDatabase.getInstance().getReference("heartrate/"+user.getDisplayName());
         reference_heartrate.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                adapter.clear();
-                for (DataSnapshot ds_hr : dataSnapshot.getChildren())
+
+                if (dataSnapshot.getChildrenCount() == (long) 0)
                 {
-                    adapter.add("Heart Rate: " + ds_hr.child("heartrate").getValue().toString());
+
+                    heartrate_list.setVisibility(View.GONE);
+                    eye_loading.setVisibility(View.VISIBLE);
+                    eye_loading.playAnimation();
+                    Toast.makeText(getApplicationContext(), "同步心率資料至資料庫中...", Toast.LENGTH_SHORT).show();
+
+                    for (int pos = 0; pos < 10; pos++)
+                    {
+                        reference_heartrate.child(String.valueOf(pos)).setValue(hr_stable_add[pos]);
+                    }
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            eye_loading.cancelAnimation();
+                            finish();
+                        }
+                    }, 5000);
                 }
+
+                else
+                {
+                    adapter.clear();
+                    //for (DataSnapshot ds_hr : dataSnapshot.getChildren())
+                    //{
+                    //    adapter.add("Heart Rate: " + ds_hr.child("heartrate").getValue().toString());
+                    //}
+
+                    Log.d("Childrencount", String.valueOf(dataSnapshot.getChildrenCount()));
+
+                    for (DataSnapshot ds_m2 : dataSnapshot.getChildren())
+                    {
+                        adapter.add("Heart Rate: " + ds_m2.getValue().toString());
+                    }
+                }
+
             }
 
             @Override

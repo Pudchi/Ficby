@@ -41,6 +41,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/firebase" />
 
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/eye_load"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="97dp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ficby_pic"
+        app:lottie_autoPlay="false"
+        app:lottie_fileName="eye_loading.json"
+        app:lottie_loop="true" />
+
+
     <ListView
         android:id="@+id/heartrate_list"
         android:layout_width="200dp"

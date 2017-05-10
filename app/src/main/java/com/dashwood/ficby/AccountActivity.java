@@ -140,7 +140,7 @@ public class AccountActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "設定成功! 可同步及獲取資料庫心率歷史!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), "設定成功! 已可同步資料庫心率歷史!", Toast.LENGTH_LONG).show();
                                     finish();
                                 }
                             }
